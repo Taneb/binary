@@ -33,7 +33,7 @@ module Data.Binary.Class (
 
 import Data.Word
 
-import Data.Binary.Builder
+import Data.Binary.Builder (Builder)
 import Data.Binary.Get
 import Data.Binary.Put
 
