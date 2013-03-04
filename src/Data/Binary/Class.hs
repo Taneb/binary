@@ -33,8 +33,9 @@ module Data.Binary.Class (
 
 import Data.Word
 
-import Data.Binary.Put
+import Data.Binary.Builder
 import Data.Binary.Get
+import Data.Binary.Put
 
 import Control.Monad
 import Foreign
@@ -95,8 +96,12 @@ class GBinary f where
 -- other. A range of instances are provided for basic Haskell types.
 --
 class Binary t where
+    -- | Encode a value in the Builder monoid.
+    build :: t -> Builder
+    build = execPut . put
     -- | Encode a value in the Put monad.
     put :: t -> Put
+    put = putBuilder . build
     -- | Decode a value in the Get monad
     get :: Get t
 
