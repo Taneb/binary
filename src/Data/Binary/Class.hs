@@ -78,7 +78,7 @@ class GBinary f where
     gget :: Get (f t)
 #endif
 
--- | The 'Binary' class provides 'put' and 'get', methods to encode and
+-- | The 'Binary' class provides 'put', 'build' and 'get', methods to encode and
 -- decode a Haskell value to a lazy 'ByteString'. It mirrors the 'Read' and
 -- 'Show' classes for textual representation of Haskell types, and is
 -- suitable for serialising Haskell values to disk, over the network.
@@ -95,6 +95,9 @@ class GBinary f where
 -- That is, the 'get' and 'put' methods should be the inverse of each
 -- other. A range of instances are provided for basic Haskell types.
 --
+-- 'build' and 'put' have default implentations in terms of each other,
+-- and so only one of these needs to be defined.
+--
 class Binary t where
     -- | Encode a value in the Builder monoid.
     build :: t -> Builder
@@ -102,7 +105,7 @@ class Binary t where
     -- | Encode a value in the Put monad.
     put :: t -> Put
     put = putBuilder . build
-    -- | Decode a value in the Get monad
+    -- | Decode a value in the Get monad.
     get :: Get t
 
 #ifdef GENERICS

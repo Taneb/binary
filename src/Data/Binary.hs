@@ -51,11 +51,13 @@ module Data.Binary (
     , GBinary(..)
 #endif
 
-    -- * The Get and Put monads
+    -- * The Builder monoid and the Get and Put monads
+    , Builder
     , Get
     , Put
 
     -- * Useful helpers for writing instances
+    , singleton
     , putWord8
     , getWord8
 
@@ -76,6 +78,7 @@ module Data.Binary (
 import Data.Word
 
 import Data.Binary.Class
+import Data.Binary.Builder (Builder, singleton)
 import Data.Binary.Put
 import Data.Binary.Get
 #ifdef GENERICS
